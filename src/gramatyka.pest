@@ -1,0 +1,3 @@
+csv = { record* }
+record = { field ~ ("," ~ field)* }
+field = { "\"" ~ (!"\"" ~ ANY)* ~ "\"" | (!"," ~ ANY)+ }
