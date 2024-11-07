@@ -1,4 +1,4 @@
-# CSV PARSER
+# CSV_PARSER_MOSHKOVSKYI
 Realisation of basic csv parser
 # Technical description
 This parser is parsing a csv file.
