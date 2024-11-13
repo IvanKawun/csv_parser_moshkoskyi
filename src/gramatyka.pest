@@ -1,3 +1,6 @@
-csv = { record* }
+WHITESPACE = _{ " " | "\t" | "\n" | "\r" }
+NEWLINE = _{ "\n" | "\r\n" }
+
+csv = { record ~ (NEWLINE ~ record)* ~ NEWLINE? }
 record = { field ~ ("," ~ field)* }
-field = { "\"" ~ (!"\"" ~ ANY)* ~ "\"" | (!"," ~ ANY)+ }
+field = { "\"" ~ (!"\"" ~ ANY)* ~ "\"" | (!("," | NEWLINE) ~ ANY)+ }
