@@ -2,9 +2,17 @@ use pest::iterators::Pair;
 use pest::Parser;
 use pest_derive::Parser;
 use thiserror::Error;
+<<<<<<< HEAD
 
 #[derive(Parser)]
 #[grammar = "gramatyka.pest"]
+=======
+use pest::iterators::Pair;
+
+
+#[derive(Parser)]
+#[grammar = "gramatyka.pest"] 
+>>>>>>> a0e6417339afd214f12d9739459a7a535afde8f5
 pub struct Grammar;
 
 #[derive(Error, Debug)]
@@ -18,10 +26,18 @@ pub enum CsvParseError {
 }
 
 pub fn parse_csv(file_content: &str) -> Result<(), CsvParseError> {
+<<<<<<< HEAD
     let parsed = Grammar::parse(Rule::csv, file_content).map_err(|e| {
         println!("Parsing error: {:?}", e);
         CsvParseError::PestError(e)
     })?;
+=======
+    let parsed = Grammar::parse(Rule::csv, file_content)
+        .map_err(|e| {
+            println!("Parsing error: {:?}", e);
+            CsvParseError::PestError(e)
+        })?;
+>>>>>>> a0e6417339afd214f12d9739459a7a535afde8f5
 
     println!("{}", file_content);
 
@@ -34,7 +50,11 @@ pub fn parse_csv(file_content: &str) -> Result<(), CsvParseError> {
                         .into_inner()
                         .map(|field| field.as_str().trim_matches('"'))
                         .collect();
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> a0e6417339afd214f12d9739459a7a535afde8f5
                     println!("Record: {:?}", fields);
                 }
                 _ => return Err(CsvParseError::InvalidCsvStructure),
@@ -42,5 +62,9 @@ pub fn parse_csv(file_content: &str) -> Result<(), CsvParseError> {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a0e6417339afd214f12d9739459a7a535afde8f5
     Ok(())
 }

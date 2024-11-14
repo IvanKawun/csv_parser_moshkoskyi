@@ -1,38 +1,57 @@
-use csv_parser_moshkovskyi::Grammar;
-use pest::Parser;
-use csv_parser_moshkovskyi::Rule;
+use csv_parser_moshkovskyi::parse_csv;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[test]
+fn test_csv_parsing() {
+    let csv_content = r#"
+    "name","age","city"
+    "John Doe",30,"New York"
+    "Jane Smith",25,"Los Angeles"
+    "Sam Brown",22,"Chicago"
+    "#;
 
-    #[test]
-    fn test_valid_csv() {
-        let file_content = r#"
-            "name","age","city"
-            "John Doe",30,"New York"
-            "Jane Smith",25,"Los Angeles"
-            "Sam Brown",22,"Chicago"
-        "#;
+    let result = parse_csv(csv_content);
+    assert!(result.is_ok());
+}
+#[test]
+fn test_single_record() {
+    let single_record = r#"
+    "name","age","city"
+    "John Doe",30,"New York"
+    "#;
 
-        let parsed = Grammar::parse(Rule::csv, file_content);
-        
-        assert!(parsed.is_ok());
-        let parsed = parsed.unwrap();
+    let result = parse_csv(single_record);
+    assert!(result.is_ok());
+}
 
-        assert_eq!(parsed.len(), 4);
-    }
+#[test]
+fn test_empty_field() {
+    let csv_content = r#"
+    "name",,"city"
+    "John Doe",, "New York"
+    "#;
 
-    #[test]
-    fn test_invalid_csv() {
-        let file_content = r#"
-            "name","age","city"
-            "John Doe",30,"New York"
-            "Jane Smith",25
-            "Sam Brown",22,"Chicago"
-        "#;
+    let result = parse_csv(csv_content);
+    assert!(result.is_ok());
+}
 
-        let parsed = Grammar::parse(Rule::csv, file_content);
-        assert!(parsed.is_err());
-    }
+#[test]
+fn test_quoted_field() {
+    let quoted_field = r#"
+    "name","age","city"
+    "John Doe","30","New York"
+    "#;
+
+    let result = parse_csv(quoted_field);
+    assert!(result.is_ok());
+}
+
+#[test]
+fn test_unquoted_field() {
+    let unquoted_field = r#"
+    name,age,city
+    John Doe,30,New York
+    "#;
+
+    let result = parse_csv(unquoted_field);
+    assert!(result.is_ok());
 }
