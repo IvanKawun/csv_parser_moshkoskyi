@@ -1,8 +1,6 @@
 [package]
 name = "csv_parser_moshkovskyi"
-version = "0.1.0"
 authors = ["Moshkovskyi Ivan <van.moshk@gmail.com>"]
-edition = "1"
 describe = "basic csv parser, to read and parse a csv file"
 version = "0.1.0"
 edition = "2021"
