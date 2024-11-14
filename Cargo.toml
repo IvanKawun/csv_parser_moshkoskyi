@@ -4,6 +4,8 @@ authors = ["Moshkovskyi Ivan <van.moshk@gmail.com>"]
 describe = "basic csv parser, to read and parse a csv file"
 version = "0.1.0"
 edition = "2021"
+description = "CSV parser built with Pest parser for Rust."  # Опис вашого пакету
+license = "MIT"
 
 [dependencies]
 pest = "2.7.14"
