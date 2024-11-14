@@ -14,3 +14,7 @@ field = { empty_field | quoted_field | unquoted_field }
 empty_field = _{ "," }
 quoted_field = _{ "\"" ~ (!"\"" ~ ANY | "\"" ~ "\"")* ~ "\"" }
 unquoted_field = _{ (!("," | NEWLINE | " ") ~ ANY)+ }
+# Links
+Creates.io = https://crates.io/crates/csv_parser_moshkovskyihttps://crates.io/crates/csv_parser_moshkovskyi
+GitHub = https://github.com/IvanKawun/csv_parser_moshkoskyi/tree/master
+Docs.rs = https://docs.rs/csv_parser_moshkovskyi/latest/csv_parser_moshkovskyi/
