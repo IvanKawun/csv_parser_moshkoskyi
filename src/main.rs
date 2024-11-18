@@ -18,22 +18,69 @@ fn parse_csv(file_path: &str) -> Result<(), Box<dyn Error>> {
 }
 
 fn show_credits() {
-    println!("CSV Parser CLI\nCreated by: Your Name\nVersion: 1.0");
+    println!("CSV Parser CLI\nCreated by: Moshkovskyi Ivan\nVersion: 1.0");
 }
 
 fn main() {
     let matches = Command::new("csv-parser")
         .version("1.0")
-        .author("Your Name <your.email@example.com>")
-        .about("CLI tool to parse CSV files")
+        .author("Moshkovskyi Ivan <i.moshkovskyi@ukma.edu.ua>")
+        .about("CLI tool to parse CSV files with custom help messages")
+        .help_template(
+            "\
+{bin} {version}
+{about}
+
+USAGE:
+    {usage}
+
+COMMANDS:
+{all-args}
+
+ADDITIONAL INFORMATION:
+    For detailed help on a command, run '{bin} <command> --help'.
+
+CREDITS:
+    Created by: Moshkovskyi Ivan
+    Version: 1.0
+            ")
         .subcommand(
-            Command::new("parse").about("Parse a CSV file").arg(
-                Arg::new("file")
-                    .required(true)
-                    .help("The path to the CSV file"),
-            ),
+            Command::new("parse")
+                .about("Parse a CSV file")
+                .arg(
+                    Arg::new("file")
+                        .required(true)
+                        .help("The path to the CSV file to be parsed"),
+                )
+                .help_template(
+                    "\
+COMMAND: parse
+{about}
+
+USAGE:
+    csv-parser parse <file_path>
+
+OPTIONS:
+{all-args}
+                    ",
+                ),
         )
-        .subcommand(Command::new("credits").about("Show credits information"))
+        .subcommand(
+            Command::new("credits")
+                .about("Show credits information")
+                .help_template(
+                    "\
+COMMAND: credits
+{about}
+
+USAGE:
+    csv-parser credits
+
+DESCRIPTION:
+    Displays the credits and version of the CSV Parser CLI tool.
+                    ",
+                ),
+        )
         .get_matches();
 
     match matches.subcommand() {
@@ -46,11 +93,8 @@ fn main() {
         }
         Some(("credits", _)) => show_credits(),
         _ => {
-            println!("Usage:");
-            println!("  csv-parser <command> [options]");
-            println!("\nAvailable commands:");
-            println!("  parse <file_path>    Parse the given CSV file");
-            println!("  credits              Show credits information");
+            println!("\nCustom Help:\n");
+            println!("Use 'csv-parser --help' to see available commands.");
         }
     }
 }

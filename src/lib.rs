@@ -1,4 +1,3 @@
-use pest::iterators::Pair;
 use pest::Parser;
 use pest_derive::Parser;
 use thiserror::Error;
@@ -6,12 +5,14 @@ use thiserror::Error;
 #[grammar = "gramatyka.pest"]
 pub struct Grammar;
 
+/// Custom errors for CSV parsing.
 #[derive(Error, Debug)]
-
 pub enum CsvParseError {
-    #[error("ERror")]
+    /// Raised when the CSV structure is invalid.
+    #[error("Error: Invalid CSV structure")]
     InvalidCsvStructure,
 
+    /// Raised when `pest` encounters a parsing error.
     #[error("Pest parsing error: {0}")]
     PestError(#[from] pest::error::Error<Rule>),
 }

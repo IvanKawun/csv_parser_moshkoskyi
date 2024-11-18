@@ -140,7 +140,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "csv_parser_moshkovskyi"
+name = "csv_parser"
 version = "0.1.0"
 dependencies = [
  "clap",

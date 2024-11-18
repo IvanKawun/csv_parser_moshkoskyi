@@ -1,4 +1,4 @@
-use csv_parser_moshkovskyi::parse_csv;
+use csv_parser::parse_csv;
 
 #[test]
 fn test_csv_parsing() {
