@@ -55,3 +55,26 @@ fn test_unquoted_field() {
     let result = parse_csv(unquoted_field);
     assert!(result.is_ok());
 }
+#[test]
+fn test_quoted_field_with_escape() {
+    let csv_content = r#"
+    "name","description"
+    "Widget","A ""high-quality"" widget"
+    "Gadget","A ""useful, multi-purpose"" gadget"
+    "#;
+
+    let result = parse_csv(csv_content);
+    assert!(result.is_ok());
+}
+
+#[test]
+fn test_multi_line_field() {
+    let csv_content = r#"
+    "name","description"
+    "Widget","A widget with multiple lines of description"
+    "Gadget","Another example of a multi-line field"
+    "#;
+
+    let result = parse_csv(csv_content);
+    assert!(result.is_ok());
+}
