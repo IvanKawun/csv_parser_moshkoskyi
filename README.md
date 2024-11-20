@@ -98,5 +98,5 @@ Record { 0: "Charlie", 1: "35", 2: "Los Angeles" }
 
 - **multi_line_field**: Represents a field enclosed in quotes that can span multiple lines. The field ends when a closing quote is encountered. Line breaks inside the field are treated as part of the field's content.
     ```rust
-    multi_line_field = _{"\"" ~ (!"\"" ~ ANY | NEWLINE ~ ANY)* ~ "\"" }
+    multi_line_field = _{ "\"" ~ (!"\"" ~ ANY | NEWLINE ~ ANY)* ~ "\"" }
     ```
