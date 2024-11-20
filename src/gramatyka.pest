@@ -59,4 +59,4 @@ quoted_field_with_escape = _{ "\"" ~ (!"\"" ~ ANY | "\"" ~ "\"")* ~ "\"" }
 /// multi_line_field represents a field that can span multiple lines. 
 /// This field is enclosed in quotes and may contain line breaks.
 /// The field continues across lines until a closing quote is encountered.
-multi_line_field = _{ "\"" ~ (!"\"" ~ ANY | NEWLINE ~ ANY)* ~ "\"" }
+multi_line_field = _{"\"" ~ (!"\"" ~ ANY | NEWLINE ~ ANY)* ~ "\""}
